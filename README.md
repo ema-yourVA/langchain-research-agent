@@ -1,5 +1,7 @@
 # Research Agent
 
+[![checks](https://github.com/ema-yourVA/langchain-research-agent/actions/workflows/checks.yml/badge.svg)](https://github.com/ema-yourVA/langchain-research-agent/actions/workflows/checks.yml)
+
 Type a question. The agent searches Google, picks the best pages, reads them,
 and writes you a short report with numbered sources, so you can check where
 every claim came from. One run takes about two minutes and costs about 15 cents.
@@ -9,6 +11,8 @@ python research_agent.py "n8n vs Make vs Zapier in 2026: which skill are clients
 ```
 
 See a real report it wrote: [examples/n8n-vs-make-vs-zapier-2026.md](examples/n8n-vs-make-vs-zapier-2026.md)
+
+![A report the agent wrote, with numbered sources](docs/example-report.png)
 
 ## Why I built it
 
@@ -109,3 +113,7 @@ Each report is saved in the `reports` folder.
 
 Ema, AI automation and data operations specialist.
 [emayourvirtualassistant.com](https://emayourvirtualassistant.com)
+
+## License
+
+MIT. You are free to use and change this code. See [LICENSE](LICENSE).

@@ -1,0 +1,36 @@
+# Runs on every push. Two checks:
+# 1. The code installs and loads, and has no obvious mistakes (ruff).
+# 2. No password, key or token was committed by accident (gitleaks).
+name: checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff -r requirements.txt
+      - name: Look for mistakes
+        run: ruff check --select E9,F --output-format=github .
+      - name: Make sure it loads
+        run: python -c "import research_agent"
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan every commit for keys and tokens
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
